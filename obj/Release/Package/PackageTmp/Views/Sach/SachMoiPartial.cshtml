@@ -1,0 +1,32 @@
+﻿@using BanSach.Models;
+@model List<Sach>
+
+
+<h3 style="text-align:center;color:white;margin-bottom:10px;padding-top:10px;">Sách Mới</h3>
+@{ 
+    foreach (var item in Model)
+    {
+        <div class="activity-list-update" id="xemchitiet">
+            
+            <img src="@Url.Content("~/HinhAnhSp/"+item.AnhBia)" width="50" height="71" alt="" />
+            @if (item.TenSach.Length > 30) { 
+            <p><strong title="@item.TenSach">Tiêu đề: @item.TenSach.Substring(0,30)...</strong> <br /><a href="@Url.Action("XemChiTiet", new {@masach=item.MaSach})">Xem chi tiết</a></p>
+             }
+                else
+                {
+                <p><strong title="@item.TenSach">Tiêu đề: @item.TenSach</strong><br /><a href="@Url.Action("XemChiTiet", new {@masach=item.MaSach})">Xem chi tiết</a></p>
+                }
+            <div class="clear"></div>
+        </div>
+    }
+}
+
+<a href="#" style="background-color: #0092a5" class="item-footer green">
+    Sách loại mới nhất
+</a>
+
+<style>
+    #xemchitiet{
+        height:100px;
+    }
+</style>

@@ -1,0 +1,77 @@
+﻿@model IEnumerable<BanSach.Models.DonHang>
+@using PagedList.Mvc;
+@using PagedList;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+<style>
+
+
+    .table td, .table th {
+        max-width: 155px; /* Điều chỉnh độ rộng tối đa của các cột */
+        white-space: nowrap; /* Ngăn các dòng chữ bị tràn xuống hàng dưới */
+        overflow: hidden; /* Ẩn phần vượt quá độ rộng tối đa */
+        text-overflow: ellipsis; /* Hiển thị dấu elipsis (...) nếu nội dung vượt quá */
+    }
+</style>
+
+<h2>QUẢN LÝ ĐƠN HÀNG</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MaDonHang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DaThanhToan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TinhTrangGiaoHang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayDat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayGiao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaKH)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaDonHang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DaThanhToan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TinhTrangGiaoHang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayDat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayGiao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaKH)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { @MaDonHang = item.MaDonHang }) |
+                @Html.ActionLink("Details", "Details", new { id = item.MaDonHang }) |
+                @Html.ActionLink("Delete", "Delete", new { @MaDonHang = item.MaDonHang })
+            </td>
+        </tr>
+    }
+
+</table>

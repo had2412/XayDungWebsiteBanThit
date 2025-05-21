@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/IndexLayout.cshtml";
+}
+
+@Html.Partial("_Slide")
+<section class="categories" id="categories">
+    <div class="heading">
+        <h1>Browse Our Hottest<br><span>Categories</span></h1>
+        <a href="/Home/Menu" class="btn">Menu<i class='bx bx-right-arrow-alt'></i></a>
+    </div>
+</section>
+
+
+
+<section class="banner-container">
+
+    <div class="banner">
+            <img src="~/Content/img/bn1.png" alt="" />
+            <div class="content">
+                <span>Giảm giá độc quyền</span>
+                <h3>THỊT GÀ</h3>
+                <br />
+                <a href="@Url.Action("ThitTheoChuDe", new {MaChuDe = 1})" class="btnbanner">liên hệ</a>
+            </div>
+    </div>
+
+
+    <div class="banner">
+        <img src="~/Content/img/bn2.png" alt="" />
+        <div class="content">
+            <span>Giảm giá độc quyền</span>
+            <h3>THỊT HEO</h3>
+            <br />
+            <a href="@Url.Action("ThitTheoChuDe", new {MaChuDe = 2})" class="btnbanner">liên hệ</a>
+        </div>
+    </div>
+
+    <div class="banner">
+        <img src="~/Content/img/bn3.png" alt="" />
+        <div class="content">
+            <span>Giảm giá độc quyền</span>
+            <h3>THỊT BÒ</h3>
+            <br />
+            <a href="@Url.Action("ThitTheoChuDe", new {MaChuDe = 3})" class="btnbanner">liên hệ</a>
+        </div>
+    </div>
+
+</section>

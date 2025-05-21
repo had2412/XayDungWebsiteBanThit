@@ -1,0 +1,224 @@
+﻿@using BanSach.Models;
+
+@model Thit
+@{
+    ViewBag.Title = "XemChiTiet";
+    Layout = "~/Views/Layout/IndexLayout.cshtml";
+}
+
+<style>
+    #divNoiDungBenPhai {
+        display: none;
+    }
+
+    #divMenuSlider {
+        display: none;
+    }
+</style>
+
+<div id="ToanBo">
+    <div id="HinhAnh" style="padding-top:20rem;">
+        <img src="@Url.Content("~/HinhAnhSP/"+Model.AnhBia)" alt="" />
+    </div>
+
+    <div id="ThongTin" style="padding-top:20rem;">
+        <div id="TenSach">@Model.TenThit</div>
+        <div id="ChuDe">Chủ đề: @ViewBag.TenChuDe</div>
+        <div id="NhaXuatBan">@ViewBag.NhaXuatBan</div>
+        <div id="Mota" style="font-size:12pt;">Nội dung tóm tắt:<br />- @Model.MoTa</div>
+        <div id="Gia"><span style="color:green; font-weight:normal;font-size:13pt;">Đơn giá</span><br /><span id="Gia">@string.Format("{0:0,0}", @Model.GiaBan) VNĐ</span></div>
+        <br />
+        @using (Html.BeginForm("ThemGioHang", "GioHang", new { @iMaThit = Model.MaThit, @strURL = Request.Url.ToString() }))
+        {
+            <input type="submit" style="cursor:pointer" value="Mua Hàng" id="btnGioHang" class="btn btn-primary" />
+
+        }
+    </div>
+    <div style="clear:both"></div>
+</div>
+<h3 style="margin-top: 3rem;">Đánh giá sản phẩm</h3>
+
+<div class="form-danhgia">
+    @using (Html.BeginForm("ThemDanhGia", "DanhGia", FormMethod.Post))
+    {
+        @Html.Hidden("MaThit", Model.MaThit)
+
+        <label for="SoSao">Số sao:</label>
+        <select name="SoSao" required>
+            <option value="5">5 sao</option>
+            <option value="4">4 sao</option>
+            <option value="3">3 sao</option>
+            <option value="2">2 sao</option>
+            <option value="1">1 sao</option>
+        </select>
+
+        <label for="NhanXet">Nhận xét:</label>
+        <textarea name="NhanXet" rows="4" cols="50" required></textarea>
+
+        <input type="submit" value="Gửi đánh giá" class="btn btn-success" />
+    }
+</div>
+
+<h4 style="margin-top: 2rem;">Đánh giá gần đây</h4>
+
+@{
+    var db = new BanSach.Models.QuanLyThitEntities();
+    var danhGiaList = db.DanhGias.Where(d => d.MaThit == Model.MaThit).OrderByDescending(d => d.NgayDanhGia).ToList();
+}
+
+@if (danhGiaList.Any())
+{
+    <div class="danhgia-list">
+        @foreach (var dg in danhGiaList)
+        {
+            <div class="danhgia-item">
+                <strong>@dg.KhachHang.HoTen</strong>
+                <div class="sao">
+                    @for (int i = 0; i < dg.SoSao; i++)
+                    {
+                        <i class="fa fa-star"></i>
+                    }
+                </div>
+                <p>@dg.NhanXet</p>
+                <span class="thoigian">
+                    @(dg.NgayDanhGia.HasValue ? dg.NgayDanhGia.Value.ToString("dd/MM/yyyy HH:mm") : "")
+                </span>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>Chưa có đánh giá nào.</p>
+}
+
+
+
+<style>
+    .form-danhgia {
+        margin-top: 1rem;
+        background-color: #f9f9f9;
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 0 8px rgba(0,0,0,0.05);
+        max-width: 600px;
+    }
+
+        .form-danhgia label {
+            display: block;
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+
+        .form-danhgia select,
+        .form-danhgia textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-danhgia input[type="submit"] {
+            padding: 0.5rem 1rem;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+            .form-danhgia input[type="submit"]:hover {
+                background-color: #218838;
+            }
+
+    .danhgia-list {
+        max-width: 600px;
+        margin-top: 1.5rem;
+    }
+
+    .danhgia-item {
+        background-color: #f0f0f0;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border-left: 4px solid #ffc107;
+        border-radius: 5px;
+    }
+
+        .danhgia-item .sao {
+            color: #ffc107;
+            margin-bottom: 0.3rem;
+        }
+
+        .danhgia-item p {
+            margin: 0.5rem 0;
+            font-size: 1rem;
+        }
+
+        .danhgia-item .thoigian {
+            font-size: 0.9rem;
+            color: #555;
+            display: block;
+            margin-top: 0.5rem;
+        }
+    #ToanBo {
+        padding-left: 20rem;
+    }
+
+    #HinhAnh {
+        float: left;
+    }
+
+        #HinhAnh img {
+            width: 300px;
+            height: 300px;
+        }
+
+    #ThongTin {
+        float: left;
+        width: 600px;
+        margin-left: 30px;
+    }
+
+    #TenSach {
+        font-weight: normal;
+        font-size: 18pt;
+        height: auto;
+        word-wrap: break-word;
+        color: red;
+    }
+
+    #ChuDe, #NhaXuatBan {
+        font-size: 15pt;
+        font-weight: normal;
+        color: black;
+        height: auto;
+    }
+
+    #Mota {
+        font-weight: normal;
+        color: black;
+        word-wrap: break-word;
+        height: auto;
+    }
+
+    #Gia span#Gia {
+        font-weight: normal;
+        color: orange;
+        font-size: 25pt;
+        height: auto;
+    }
+
+    #btnGioHang {
+        background-color: black;
+    }
+
+        #btnGioHang:hover {
+            background-color: #bac34e
+        }
+</style>
+
+
+

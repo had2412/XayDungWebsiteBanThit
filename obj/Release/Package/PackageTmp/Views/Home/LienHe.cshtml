@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "LienHe";
+    Layout = "~/Views/Layout/IndexLayout.cshtml";
+}
+<div class="headingmenu">
+    <h1>Liên hệ</h1>
+    <p><a href="/Home/Index">home >></a> shop </p>
+</div>
+
+
+<main style="margin-bottom: 10rem;">
+
+    <section id="contact-form">
+        <h2 style="font-size:14pt;">Gửi tin nhắn cho chúng tôi</h2>
+        @using (Html.BeginForm("LienHe", "Home", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <label for="name" style="font-size: 12pt;">Họ tên:</label>
+            <input type="text" id="name" name="HoTen" style="border-radius: 0.5rem; background-color: #CFCFCF" required>
+            <label for="email" style="font-size: 12pt;">Email:</label>
+            <input type="email" id="email" name="Email" style="border-radius: 0.5rem; background-color: #CFCFCF" required>
+            <label for="message" style="font-size: 12pt;">Tin nhắn:</label>
+            <textarea id="message" name="TinNhan" style="border-radius: 1rem; align-items:center;justify-items:center;font-size:13pt;margin-top:5rem;margin-bottom:-2rem;background-color: #CFCFCF" required></textarea>
+            <input type="submit" id="GuiButton" class="submit-button" style="font-size: 13pt; border-radius: 1rem; cursor: pointer;" value="Gửi">
+        
+        }
+    </section>
+    <section>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1588.4094954170184!2d106.67462104000529!3d10.980365085579233!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174d1085e2b1c37%3A0x73bfa5616464d0ee!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBUaOG7pyBE4bqndSBN4buZdA!5e0!3m2!1svi!2s!4v1699518013173!5m2!1svi!2s" width="1100" height="550" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+
+</main>
+
+

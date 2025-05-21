@@ -1,0 +1,45 @@
+﻿@model IEnumerable<BanSach.Models.ThongKeDoanhThuViewModel>
+
+@{
+    ViewBag.Title = "Thống kê doanh thu";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+<h2 style="text-align:center;">Thống kê doanh thu theo sản phẩm</h2>
+
+<!-- Form lọc ngày -->
+<form method="get" action="@Url.Action("DoanhThu", "ThongKe")" style="text-align:center; margin-bottom: 20px;">
+    Từ ngày:
+    <input type="date" name="fromDate" value="@Request["fromDate"]" />
+    Đến ngày:
+    <input type="date" name="toDate" value="@Request["toDate"]" />
+    <input type="submit" value="Lọc" class="btn btn-primary" />
+</form>
+
+<table class="table table-bordered table-striped" style="width: 80%; margin: 0 auto; text-align: center;">
+    <thead class="thead-dark">
+        <tr>
+            <th>Mã Thịt</th>
+            <th>Tên Thịt</th>
+            <th>Số lượng bán</th>
+            <th>Doanh thu (VNĐ)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MaThit</td>
+                <td>@item.TenThit</td>
+                <td>@item.SoLuongBan</td>
+                <td>@string.Format("{0:0,0}", item.DoanhThu)</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr style="font-weight:bold;">
+            <td colspan="3" style="text-align:right;">Tổng doanh thu:</td>
+            <td>@string.Format("{0:0,0}", ViewBag.TongDoanhThu) VNĐ</td>
+        </tr>
+    </tfoot>
+</table>

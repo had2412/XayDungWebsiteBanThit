@@ -1,0 +1,15 @@
+﻿@model BanSach.Models.Voucher
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+<h2>Bạn chắc chắn muốn xoá voucher <strong>@Model.MaVoucher</strong>?</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-danger">Xoá</button>
+    @Html.ActionLink("Huỷ", "Index", null, new { @class = "btn btn-default" })
+}

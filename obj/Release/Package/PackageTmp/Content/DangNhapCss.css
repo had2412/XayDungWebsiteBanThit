@@ -1,0 +1,83 @@
+﻿body {
+    background-image: url(../Content/img/background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.ToanTrang {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 100%;
+}
+
+.page-title {
+    margin-bottom: 1rem;
+}
+
+.custom-form {
+    margin-top: 1rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.custom-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #162938;
+    outline: none;
+    padding: 0.5rem;
+}
+
+#DangNhapButton {
+    background: #162938;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    font-size: 16pt;
+    color: #fff;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    #DangNhapButton:hover {
+        background-color: #bac34e;
+    }
+
+#DangKyButton:hover,
+#TrangChuButton:hover {
+    box-shadow: 0 1px white;
+}
+
+.login-fail-message {
+    color: #162938;
+    font-size: 11pt;
+}
+
+@media (max-width: 767px) {
+    .ToanTrang {
+        padding: 1rem;
+    }
+
+    .custom-input {
+        font-size: 14pt;
+    }
+
+    #DangNhapButton {
+        font-size: 14pt;
+    }
+
+    .login-fail-message {
+        font-size: 10pt;
+    }
+}

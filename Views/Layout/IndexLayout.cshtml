@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link href="~/Content/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Content/fontawesome-free-6.4.2-web/css/fontawesome.min.css" rel="stylesheet" />
+    <link href="~/Content/fontawesome-free-6.4.2-web/css/all.min.css" rel="stylesheet" />
+    <link href="~/Content/fontawesome-free-6.4.2-web/css/all.css" rel="stylesheet" />
+</head>
+<body>
+    @{ var user = Session["KhachHang"] as BanSach.Models.KhachHang;}
+    @RenderBody()
+    <header class="header">
+        <a href="index.html" class="logo"><img src="~/Content/img/logofinal.png" alt="" /></a>
+
+        <nav class="navbar">
+            <a href="/Home/Index">Trang Chủ</a>
+            <a href="/Home/Menu">Sản Phẩm</a>
+            <a href="/Home/AboutUs">Giới Thiệu</a>
+            <a href="/GiamGia/Menu">Khuyến Mãi</a>
+            <a href="/Home/LienHe">Liên Hệ</a>
+            <a href="/Home/TinTuc">Tin Tức</a>
+        </nav>
+        <div class="icons">
+            <div id="menu-btn" class="fas fa-bars"></div>
+
+
+            @Html.Action("GioHangPartial", "GioHang")
+
+            @{if (user == null)
+                {
+                    <a href="@Url.Action("DangNhap", "Home")" class="DangNhap">
+                        <div id="login-btn" class="fas fa-user"></div>
+                    </a>
+                }
+
+                else
+                {
+                    <a href="@Url.Action("DangXuat", "Home")" class="DangNhap">
+                        <div id="login-btn" class="fas fa-sign-out"></div>
+                    </a>
+                    <a href="@Url.Action("ThongTin", "KhachHang")" class="DangNhap">
+                        <div id="login-btn" class="fas fa-user"></div>
+                    </a>
+                }
+            }
+            <div id="menu-search" class="fas fa-search"></div>
+        </div>
+        <div id="txtTimKiem">
+            
+            @using (Html.BeginForm("KetQuaTimKiem", "TimKiem", FormMethod.Post))
+            {
+                @Html.TextBox("txtTimKiem", "", htmlAttributes: new { @class = "textBoxTimKiem", @placeholder = "Search here..." })
+            }
+
+        </div>
+
+
+</header>
+
+
+
+
+
+
+
+    <section class="footer">
+
+        <div class="icons-container">
+
+            <div class="icons">
+                <i class="fas fa-clock"></i>
+                <h3>opening hours</h3>
+                <p>07:00am to 10:00pm</p>
+            </div>
+
+            <div class="icons">
+                <i class="fas fa-phone"></i>
+                <h3>phone number</h3>
+                <p>098.111.1111</p>
+                <p>098.222.2222</p>
+            </div>
+
+            <div class="icons">
+                <i class="fas fa-envelope"></i>
+                <h3>email</h3>
+                <p>bbxq@gmail.com</p>
+            </div>
+
+            <div class="icons">
+                <i class="fas fa-map"></i>
+                <h3>address</h3>
+                <p>324/Lê Hồng Phong/TDM/BinhDuong</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="credit">create by HoangAnhDung |all rights reserved!</section>
+
+    <script src="~/Scripts/js/main.js"></script>
+</body>
+</html>

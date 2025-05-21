@@ -1,0 +1,110 @@
+﻿@using BanSach.Models;
+@model List<GioHang>
+@{
+    ViewBag.Title = "GioHang";
+    Layout = "~/Views/Layout/IndexLayout.cshtml";
+}
+<div id="GioHang">
+    <h2>Giỏ hàng của tôi</h2>
+    <div id="ThongTinGioHang">
+        <table border="1">
+
+            <tr>
+                <td>Mã Sản Phẩm</td>
+                <td>Tên Sản Phẩm</td>
+                <td>Ảnh bìa</td>
+                <td>Đơn giá</td>
+                <td>Số lượng</td>
+                <td>Thành tiền</td>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.iMaSach</td>
+                    <td>@item.sTenSach</td>
+                    <td><a href="@Url.Action("XemChiTiet","Sach", new {@MaSach = item.iMaSach})"><img src="@Url.Content("~/HinhAnhSP/"+item.sAnhBia)" width="50" height="50" /></a></td>
+                    <td>@string.Format("{0:0,0}", item.dDonGia) VNĐ</td>
+                    <td>@item.iSoLuong</td>
+                    <td>@string.Format("{0:0,0}", item.ThanhTien) VNĐ</td>
+
+                </tr>
+
+            }
+
+            <tr>
+                <td  colspan="6" style="text-align:right;color:blue;cursor:pointer;">
+                    <a id="hoverChinhSua" href="SuaGioHang">Chỉnh Sửa Giỏ Hàng</a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6" style="text-align:right;color:blue; cursor:pointer;">
+                    @using (Html.BeginForm("DatHang", "GioHang"))
+                    {
+                        <input type="submit" id="DatHangButton" class="submit-button" style="font-size: 13pt; border-radius: 0.5rem; cursor: pointer;" value="Đặt hàng"
+                               onmouseover="this.style.cursor='pointer';">
+                        
+                    }
+                </td>
+
+            </tr>
+
+        </table>
+    </div>
+</div>
+<div id="ThongBaoDatHang" style="display: none; color: green;">
+    Đặt hàng thành công!
+</div>
+
+
+<style>
+    #divGioHang {
+        border: 1px solid #EEEEEE;
+        margin-left: 10%;
+        padding-top: 10rem;
+    }
+
+    #ThongTinGioHang {
+        display: flex;
+        justify-content: space-between;
+        background-color: #f0f0f0; /* Màu nền của hàng */
+        font-weight: bold; /* In đậm nội dung */
+        padding: 10px; /* Khoảng cách giữa các cột */
+        padding-top: 12rem;
+        font-size: 13pt;
+    }
+
+        #ThongTinGioHang td {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+        }
+
+    #DatHangButton:hover {
+        background-color: #bac34e;
+    }
+
+    #hoverChinhSua:hover {
+        background-color: #bac34e;
+    }
+</style>
+<script>
+    document.querySelector("#DatHangButton").addEventListener("mouseover", function () {
+        this.style.cursor = "pointer";
+    });
+
+    document.querySelector("#DatHangButton").addEventListener("click", function (e) {
+       
+
+
+
+        // Hiển thị thông báo "Đặt hàng thành công"
+        alert("Đặt hàng thành công!");
+
+        // Tại đây, bạn có thể thực hiện các xử lý đặt hàng thực tế
+        // Ví dụ: Gửi dữ liệu đặt hàng lên máy chủ và nhận phản hồi từ máy chủ (sử dụng Ajax hoặc gửi form thông thường).
+
+        // Sau khi đặt hàng thành công, bạn có thể chuyển người dùng đến trang cảm ơn hoặc trang khác nếu cần.
+    });
+    
+</script>

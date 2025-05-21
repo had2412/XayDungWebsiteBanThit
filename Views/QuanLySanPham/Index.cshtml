@@ -1,0 +1,104 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.PagedList<BanSach.Models.Thit>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+<style>
+    
+
+        .table td, .table th {
+            max-width: 155px; /* Điều chỉnh độ rộng tối đa của các cột */
+            white-space: nowrap; /* Ngăn các dòng chữ bị tràn xuống hàng dưới */
+            overflow: hidden; /* Ẩn phần vượt quá độ rộng tối đa */
+            text-overflow: ellipsis; /* Hiển thị dấu elipsis (...) nếu nội dung vượt quá */
+        }
+</style>
+
+
+<h2>QUẢN LÝ SẢN PHẨM</h2>
+
+<p>
+    @Html.ActionLink("Thêm Mới", "ThemMoi")
+</p>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Ma SP
+        </th>
+        <th>
+            Ten SP
+        </th>
+        <th>
+            GiaBan
+        </th>
+        <th>
+            MoTa
+        </th>
+        <th>
+            AnhBia
+        </th>
+        <th>
+            NgayCapNhat
+        </th>
+        <th>
+            SoLuongTon
+        </th>
+       
+        <th>
+            LoaiSP
+        </th>
+        
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaThit)
+            </td>
+            <td class="TenSach">
+                @Html.DisplayFor(modelItem => item.TenThit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiaBan)
+            </td>
+            <td class="MoTa">
+                @Html.DisplayFor(modelItem => item.MoTa)
+            </td>
+            <td class="image">
+                <a href="@Url.Action("XemChiTiet", "Thit", new {@MaThit=item.MaThit})"> <div id="AnhBia"><img src="@Url.Content("~/HinhAnhSP/"+item.AnhBia)" width="100" height="150"></div></a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayCapNhat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuongTon)
+            </td>
+
+            <td>
+                @(item.ChuDe != null ? item.ChuDe.TenChuDe : "Không có")
+            </td>
+
+
+            <td>
+                <div style="white-space: nowrap;max-width:200px;">
+                    @Html.ActionLink("Edit", "Edit", new { @MaThit = item.MaThit }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.MaThit }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MaThit })
+                </div>
+            </td>
+
+        </tr>
+    }
+
+</table>
+Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+<div class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+</div>

@@ -1,0 +1,153 @@
+﻿@{
+    ViewBag.Title = "ThongTin";
+    Layout = "~/Views/Layout/IndexLayout.cshtml";
+    var donHangs = ViewBag.DonHangs as List<BanSach.Models.DonHang>;
+    var chiTietDonHangs = ViewBag.ChiTietDonHangs as List<BanSach.Models.ChiTietDonHang>;
+}
+
+@model BanSach.Models.KhachHang
+
+<style>
+    .customer-info-container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 30px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 16px;
+    }
+
+        .customer-info-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+    .customer-info-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .customer-info-table td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+            .customer-info-table td:first-child {
+                font-weight: bold;
+                color: #555;
+                width: 35%;
+            }
+
+            .customer-info-table td:last-child {
+                color: #222;
+            }
+
+    .customer-info-container .btn-edit {
+        display: inline-block;
+        margin-top: 20px;
+        text-align: center;
+        padding: 10px 20px;
+        background-color: #3498db;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+    }
+
+        .customer-info-container .btn-edit:hover {
+            background-color: #2980b9;
+        }
+
+    /* Bảng đơn hàng */
+    .orders-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 40px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+        .orders-table th, .orders-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .orders-table th {
+            background-color: #3498db;
+            color: white;
+        }
+</style>
+
+<div class="customer-info-container">
+    <h2>Thông Tin Khách Hàng</h2>
+
+    <table class="customer-info-table">
+        <tr><td>Họ tên:</td><td>@Model.HoTen</td></tr>
+        <tr><td>Tài khoản:</td><td>@Model.TaiKhoan</td></tr>
+        <tr><td>Mật khẩu:</td><td>@Model.MatKhau</td></tr>
+        <tr><td>Email:</td><td>@Model.Email</td></tr>
+        <tr><td>Địa chỉ:</td><td>@Model.DiaChi</td></tr>
+        <tr><td>Điện thoại:</td><td>@Model.DienThoai</td></tr>
+        <tr><td>Giới tính:</td><td>@Model.GioiTinh</td></tr>
+        <tr><td>Ngày sinh:</td><td>@Model.NgaySinh</td></tr>
+    </table>
+
+    <a href="@Url.Action("ChinhSua", "KhachHang")" class="btn-edit">Chỉnh sửa thông tin</a>
+
+    @* Phần hiển thị đơn hàng *@
+    @if (ViewBag.DonHangs != null && ((List<BanSach.Models.DonHang>)ViewBag.DonHangs).Any())
+    {
+        <h3>Đơn hàng đã đặt</h3>
+        <table class="orders-table">
+            <thead>
+                <tr>
+                    <th>Mã đơn hàng</th>
+                    <th>Hình ảnh sản phẩm</th>
+                    <th>Ngày đặt</th>
+                    <th>Ghi chú</th>
+                    <th>Trạng thái giao hàng</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var don in (List<BanSach.Models.DonHang>)ViewBag.DonHangs)
+                {
+                    var chiTiets = ((List<BanSach.Models.ChiTietDonHang>)ViewBag.ChiTietDonHangs)
+                        .Where(ct => ct.MaDonHang == don.MaDonHang)
+                        .ToList();
+                    <tr>
+                        <td>@don.MaDonHang</td>
+                        <td>
+                            @foreach (var ct in chiTiets)
+                            {
+                                <img src="@Url.Content("~/HinhAnhSp/" + Path.GetFileName(ct.Thit?.AnhBia ?? "no-image.png"))" alt="Ảnh SP" style="width:50px;" />
+
+                            }
+                        </td>
+                        <td>@don.NgayDat</td>
+                        <td>@don.GhiChu</td>
+                        <td>
+                            @{
+                                string trangThai = "Không xác định";
+                                switch (don.TinhTrangGiaoHang)
+                                {
+                                    case 0: trangThai = "Chưa giao"; break;
+                                    case 1: trangThai = "Đang giao"; break;
+                                    case 2: trangThai = "Đã giao"; break;
+                                }
+                            }
+                            @trangThai
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p style="margin-top: 40px;">Bạn chưa có đơn hàng nào.</p>
+    }
+
+

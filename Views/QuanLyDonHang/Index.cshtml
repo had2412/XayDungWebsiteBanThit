@@ -1,0 +1,95 @@
+﻿@model IEnumerable<BanSach.Models.DonHang>
+@using PagedList.Mvc;
+@using PagedList;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+<style>
+    .table {
+        width: 100%;
+        table-layout: fixed;
+    }
+
+        .table th, .table td {
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+    .col-id {
+        width: 100px;
+    }
+
+    .col-small {
+        width: 100px;
+    }
+
+    .col-date {
+        width: 100px;
+    }
+
+    .col-medium {
+        width: 100px;
+    }
+
+    .col-large {
+        width: 100px;
+    }
+
+    .action-links {
+        width: 100px;
+    }
+
+        .action-links a {
+            margin-right: 5px;
+            display: inline-block;
+        }
+</style>
+
+
+
+<h2>QUẢN LÝ ĐƠN HÀNG</h2>
+
+<p>
+    @Html.ActionLink("Thêm", "ThemMoi")
+</p>
+<table class="table">
+    <tr>
+        <th class="col-id">@Html.DisplayNameFor(model => model.MaDonHang)</th>
+        <th class="col-small">@Html.DisplayNameFor(model => model.DaThanhToan)</th>
+        <th class="col-small">@Html.DisplayNameFor(model => model.TinhTrangGiaoHang)</th>
+        <th class="col-date">@Html.DisplayNameFor(model => model.NgayDat)</th>
+        <th class="col-date">@Html.DisplayNameFor(model => model.NgayGiao)</th>
+        <th class="col-small">@Html.DisplayNameFor(model => model.MaKH)</th>
+        <th class="col-medium">@Html.DisplayNameFor(model => model.HoTen)</th>
+        <th class="col-large">@Html.DisplayNameFor(model => model.DiaChi)</th>
+        <th class="col-medium">@Html.DisplayNameFor(model => model.DienThoai)</th>
+        <th class="col-large">@Html.DisplayNameFor(model => model.GhiChu)</th>
+        
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.MaDonHang)</td>
+            <td>@Html.DisplayFor(modelItem => item.DaThanhToan)</td>
+            <td>@Html.DisplayFor(modelItem => item.TinhTrangGiaoHang)</td>
+            <td>@Html.DisplayFor(modelItem => item.NgayDat)</td>
+            <td>@Html.DisplayFor(modelItem => item.NgayGiao)</td>
+            <td>@Html.DisplayFor(modelItem => item.MaKH)</td>
+            <td>@Html.DisplayFor(modelItem => item.HoTen)</td>
+            <td>@Html.DisplayFor(modelItem => item.DiaChi)</td>
+            <td>@Html.DisplayFor(modelItem => item.DienThoai)</td>
+            <td>@Html.DisplayFor(modelItem => item.GhiChu)</td>
+            <td class="action-links">
+                @Html.ActionLink("Edit", "Edit", new { MaDonHang = item.MaDonHang }) |
+                @Html.ActionLink("Details", "Details", new { id = item.MaDonHang }) |
+                @Html.ActionLink("Delete", "Delete", new { MaDonHang = item.MaDonHang })
+            </td>
+        </tr>
+    }
+</table>
+

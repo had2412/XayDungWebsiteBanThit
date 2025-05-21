@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "DatHang";
+    Layout = "~/Views/Layout/IndexLayout.cshtml";
+}
+
+<div id="ThongBaoDatHang" style="display: none; color: green;">
+    Đặt hàng thành công!
+</div>
+
+<script>
+    document.querySelector("#DatHangButton").addEventListener("click", function (e) {
+    e.preventDefault(); // Ngăn chặn form được gửi đi
+
+
+
+    // Hiển thị thông báo "Đặt hàng thành công"
+    alert("Đặt hàng thành công!");
+
+    // Tại đây, bạn có thể thực hiện các xử lý đặt hàng thực tế
+    // Ví dụ: Gửi dữ liệu đặt hàng lên máy chủ và nhận phản hồi từ máy chủ (sử dụng Ajax hoặc gửi form thông thường).
+
+    // Sau khi đặt hàng thành công, bạn có thể chuyển người dùng đến trang cảm ơn hoặc trang khác nếu cần.
+});
+</script>
+
+

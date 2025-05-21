@@ -1,0 +1,15 @@
+﻿@using BanSach.Models;
+@model List<NhaXuatBan>
+
+@{
+    ViewBag.Title = "DanhMucNXB";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+
+@foreach (var item in Model)
+{
+    <a id="btnChuDe" style="width:250px; font-size:11pt;color:aliceblue;background-color:#0055bd;text-decoration:none" href="@Url.Action("SachTheoNXB", new {@MaNXB=item.MaNXB})" class="button button-submit">@item.TenNXB</a>
+    <br />
+    <br />
+}
+

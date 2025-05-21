@@ -1,0 +1,124 @@
+﻿
+.products .box-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    gap: 1.5rem;
+    width:100%;
+    
+}
+
+    .products .box-container .box {
+        position: relative;
+        background: #f3f3fe;
+        text-align: center;
+        overflow: hidden;
+        
+    }
+
+        .products .box-container .box:hover .icons {
+            top: 0;
+        }
+
+        .products .box-container .box .icons {
+            position: absolute;
+            top: -105%;
+            left: 0;
+            height: 20rem;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(243, 243, 243, 0.8);
+            gap: 1rem;
+        }
+
+            .products .box-container .box .icons a {
+                font-size: 2rem;
+                height: 5rem;
+                width: 5rem;
+                line-height: 5rem;
+                background: #fff;
+                box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+                color: #222;
+            }
+
+                .products .box-container .box .icons a:hover {
+                    background: #bac34e;
+                    color: #fff;
+                }
+
+            .products .box-container .box .icons .image {
+                height: 30rem;
+                width: 100%;
+                overflow: hidden;
+            }
+
+                .products .box-container .box .icons .image img {
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                }
+
+            .products .box-container .box .icons .content {
+                padding: 1.5rem;
+            }
+
+                .products .box-container .box .icons .content h3 {
+                    font-size: 2rem;
+                    color: #222;
+                }
+
+                .products .box-container .box .icons .content .price {
+                    font-size: 2rem;
+                    color: #222;
+                    padding: 1rem 0;
+                }
+
+                .products .box-container .box .icons .content .stars i {
+                    font-size: 1.7rem;
+                    color: #bac34e;
+                }
+
+.box-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, auto));
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+    .box-container .box {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        border-radius: 0.5rem;
+        margin-bottom: 3rem;
+    }
+
+        .box-container .box h2 {
+            padding-top: 0.5rem;
+            font-weight: 600;
+            padding-bottom: 0.5rem;
+        }
+
+        .box-container .box a {
+            text-align: center;
+            padding-top: 0.4rem;
+            padding-bottom: 0.4rem;
+        }
+button.cart:hover {
+    color: red; /* Màu sẽ chuyển sang đỏ khi hover */
+}
+
+
+
+.horizontal-pagination {
+    list-style: none;
+    display: flex;
+    font-size:14pt;
+}
+
+    .horizontal-pagination li {
+        margin-right: 10px; /* Adjust as needed to add space between pagination links */
+    }
+

@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewBag.Title = "ChinhSua";
+    Layout = "~/Views/Layout/IndexLayout.cshtml";
+}
+
+@model BanSach.Models.KhachHang
+
+@{
+    ViewBag.Title = "Chỉnh sửa thông tin";
+}
+
+<style>
+    .customer-info-container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 30px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 16px;
+    }
+
+        .customer-info-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+    .customer-info-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .customer-info-table td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+            .customer-info-table td:first-child {
+                font-weight: bold;
+                color: #555;
+                width: 35%;
+            }
+
+            .customer-info-table td:last-child {
+                color: #222;
+            }
+
+    .customer-info-container .btn-edit {
+        display: inline-block;
+        margin-top: 20px;
+        text-align: center;
+        padding: 10px 20px;
+        background-color: #3498db;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+    }
+
+        .customer-info-container .btn-edit:hover {
+            background-color: #2980b9;
+        }
+    .form-control {
+        width: 100%;
+        padding: 8px 12px;
+        margin-top: 4px;
+        margin-bottom: 8px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 14px;
+    }
+
+</style>
+
+<div class="customer-info-container">
+    <h2>Chỉnh sửa thông tin</h2>
+
+    @using (Html.BeginForm("ChinhSua", "KhachHang", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.MaKH)
+
+<table class="customer-info-table">
+    <tr>
+        <td>Họ tên:</td>
+        <td>@Html.TextBoxFor(m => m.HoTen, new { @class = "form-control" })</td>
+    </tr>
+    <tr>
+        <td>Tài khoản:</td>
+        <td>@Html.TextBoxFor(m => m.TaiKhoan, new { @class = "form-control" })</td>
+    </tr>
+    <tr>
+        <td>Mật khẩu:</td>
+        <td>@Html.TextBoxFor(m => m.MatKhau, new { @class = "form-control" })</td>
+    </tr>
+    <tr>
+        <td>Email:</td>
+        <td>@Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email" })</td>
+    </tr>
+    <tr>
+        <td>Địa chỉ:</td>
+        <td>@Html.TextBoxFor(m => m.DiaChi, new { @class = "form-control" })</td>
+    </tr>
+    <tr>
+        <td>Điện thoại:</td>
+        <td>@Html.TextBoxFor(m => m.DienThoai, new { @class = "form-control" })</td>
+    </tr>
+    <tr>
+        <td>Giới tính:</td>
+        <td>
+            @Html.DropDownListFor(m => m.GioiTinh, new SelectList(new[] { "Nam", "Nữ", "Khác" }), "-- Chọn --", new { @class = "form-control" })
+        </td>
+    </tr>
+    <tr>
+        <td>Ngày sinh:</td>
+        <td>@Html.TextBoxFor(m => m.NgaySinh, new { @class = "form-control", type = "date" })</td>
+    </tr>
+</table>
+
+        <div style="text-align:center; margin-top:20px;">
+            <button type="submit" class="btn-edit">Lưu thay đổi</button>
+            <a href="@Url.Action("ThongTin", "KhachHang")" class="btn-edit" style="background-color: gray;">Hủy</a>
+        </div>
+    }
+</div>
+

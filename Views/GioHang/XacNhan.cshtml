@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Xác nhận đơn hàng";
+    Layout = "~/Views/Layout/IndexLayout.cshtml";
+
+    var voucher = TempData["Voucher"] as string;
+    var giamGia = TempData["GiamGia"] != null ? Convert.ToDecimal(TempData["GiamGia"]) : 0;
+    var tongTien = TempData["TongTien"] != null ? Convert.ToDecimal(TempData["TongTien"]) : 0;
+}
+
+<div class="container" style="padding: 50px; background: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <h2>✅ Đặt hàng thành công!</h2>
+    <p>Cảm ơn bạn đã mua hàng tại cửa hàng của chúng tôi.</p>
+
+    <hr />
+    <h3>Thông tin đơn hàng:</h3>
+    <table class="table table-bordered">
+        <tr>
+            <th>Mã giảm giá áp dụng</th>
+            <td>@(string.IsNullOrEmpty(voucher) ? "Không có" : voucher)</td>
+        </tr>
+        <tr>
+            <th>Số tiền được giảm</th>
+            <td>@String.Format("{0:N0} VNĐ", giamGia)</td>
+        </tr>
+        <tr>
+            <th>Tổng thanh toán</th>
+            <td><strong>@String.Format("{0:N0} VNĐ", tongTien)</strong></td>
+        </tr>
+    </table>
+
+    <p>Chúng tôi sẽ liên hệ bạn để xác nhận và giao hàng trong thời gian sớm nhất.</p>
+    <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Tiếp tục mua hàng</a>
+</div>

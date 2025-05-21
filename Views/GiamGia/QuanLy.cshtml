@@ -1,0 +1,42 @@
+﻿
+
+@model List<BanSach.Models.ThitGiamGiaViewModel>
+@{
+    ViewBag.Title = "Quản lý giảm giá sản phẩm";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+<h2>Quản lý giảm giá sản phẩm</h2>
+
+@if (TempData["ThongBao"] != null)
+{
+    <div style="color: green">@TempData["ThongBao"]</div>
+}
+
+@using (Html.BeginForm("CapNhatGiamGia", "GiamGia", FormMethod.Post))
+{
+    <table class="table table-bordered">
+        <tr>
+            <th>Tên sản phẩm</th>
+            <th>Giá bán</th>
+            <th>Phần trăm giảm (%)</th>
+        </tr>
+
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td>
+                    @Html.HiddenFor(m => m[i].MaThit)
+                    @Html.DisplayFor(m => m[i].TenThit)
+                </td>
+                <td>@string.Format("{0:0,0}", Model[i].GiaBan) VNĐ</td>
+                <td>
+                    @Html.TextBoxFor(m => m[i].PhanTramGiam, new { @class = "form-control", type = "number", min = "0", max = "100" })
+                </td>
+            </tr>
+        }
+    </table>
+    <input type="submit" value="Cập nhật" class="btn btn-success" />
+}
+
+

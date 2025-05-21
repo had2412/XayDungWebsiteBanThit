@@ -1,0 +1,116 @@
+﻿@using BanSach.Models;
+@using PagedList.Mvc;
+@model List<Thit>
+
+<link href="~/Content/TrangChuCss.css" rel="stylesheet" />
+
+@{
+    Layout = "~/Views/Layout/IndexLayout.cshtml";
+    ViewBag.Title = "Menu";
+}
+
+<style>
+    .MenuTrang {
+        display: inline;
+        list-style: none;
+    }
+    /* Màu mặc định */
+    button.cart,
+    button.heart,
+    button.fa-eye {
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        font-size: 24px;
+        color: black;
+    }
+
+        /* Màu khi hover */
+        button.cart:hover,
+        button.heart:hover,
+        button.fa-eye:hover {
+            color: #bac34e; /* Đổi màu thành #bac34e khi hover */
+        }
+</style>
+<div class="headingmenu">
+    <h1>our shop</h1>
+    <p><a href="home.html">home >></a> shop </p>
+</div>
+
+
+<section class="products" id="products">
+    <div class="heading">
+        <h1>Our Popular<br><span>Products</span></h1>
+        <a href="/Home/Index" class="btn">Index<i class='bx bx-right-arrow-alt'></i></a>
+    </div>
+
+    <div class="box-container">
+        @{ int i = 0;}
+        @foreach (var item in Model)
+        {
+            i++;
+
+            <div class="box">
+                <div class="icons">
+                    @using (Html.BeginForm("ThemGioHang", "GioHang"))
+                    {
+                        @Html.Hidden("iMaThit", item.MaThit)
+                        @Html.Hidden("strURL", Request.Url.ToString())
+                        <button type="submit" class="cart">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </button>
+
+                    }
+                    <button type="submit" class="cart">
+                        <i class="fa-solid fa-heart"></i>
+                    </button>
+
+                    <button type="submit" class="cart" onclick="redirectToChiTiet('@Url.Action("XemChiTiet", "Thit", new { MaThit = item.MaThit })')">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+
+                </div>
+                <div class="image">
+                    <a href="@Url.Action("XemChiTiet", "Thit", new {@MaThit=item.MaThit})"> <div id="AnhBia"><img src="@Url.Content("~/HinhAnhSP/"+item.AnhBia)" width="200" height="150"></div></a>
+                </div>
+                <div class="content" style="padding: 1.5rem;">
+                    <h3 style="font-size: 1.5rem; color: black;">@item.TenThit</h3>
+                    <div class="price" style="font-size: 1.5rem; color: black; padding: 1rem 0;">@string.Format("{0:0,0}", item.GiaBan) VNĐ</div>
+                    <div class="stars" style=" font-size: 1.5rem; color: #bac34e;">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+
+            </div>
+
+            if (i % 8 == 0)
+            {
+                <div style="clear:both"></div>
+            }
+        }
+
+    </div>
+   
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    function redirectToChiTiet(url) {
+        window.location.href = url;
+    }
+</script>

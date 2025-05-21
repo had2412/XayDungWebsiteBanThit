@@ -1,0 +1,91 @@
+﻿div#ToanTrang {
+    position: relative;
+    font-family:'Segoe UI';
+    font-weight:bold;
+}
+
+.DangKyDangNhap {
+    float: right;
+    margin-top: -1%;
+}
+
+.DangKyDangNhap a:hover {
+    text-decoration: none;
+    color: black;
+    }
+
+.navMenu {
+    float: right;
+    margin-right:10%;
+}
+
+#divDanhMuc{
+    height:30px;
+}
+
+.navMenu li {
+    display: inline;
+    border-right: solid 1px rgba(0,0,0,.5);
+    padding: 20px;
+    padding-top: 19px;
+    padding-bottom: 22px;
+    transition: all .5s ease-out;
+}
+
+.navMenu li:hover {
+    background-color:rgba(0,0,0,.5);
+    transition:all .5s ease-out;
+}
+
+.navMenu a:hover{
+    text-decoration:none;
+}
+
+#txtTimKiem {
+    float: left;
+    margin-left: 5%;
+}
+#txtTimKiem input{
+    height:0;
+    
+}
+#divHinhAnhTiemKiem button {
+    margin-right: -50px;
+    padding: 8px 9px 8px 9px;
+    background-color:#14a19a;
+}
+
+#divHinhAnhTiemKiem button:hover {
+background-color: rgba(0,0,0,.5);
+}
+
+#slider {
+    float: right;
+    width: 1000px;
+    height: 400px;
+}
+#slider img {
+    width: 1000px;
+     
+}
+#divMenuLeft{
+    float:left;
+    width:400px;
+    
+}
+#divLeft{
+    float:left;
+    width:30%;
+}
+
+#divLeft .item{
+    width:100%;
+}
+
+#divRight{
+    float:right;
+    width:70%;
+    
+}
+
+

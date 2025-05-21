@@ -1,0 +1,55 @@
+﻿@model BanSach.Models.KhachHang
+<link href="~/Content/DangNhapCss.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "DangNhap";
+    Layout = null;
+}
+<div class="ToanTrang">
+    <h2 class="page-title" style="color:#162938;">Đăng Nhập</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+<div class="form-horizontal custom-form">
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="TaiKhoan" style="position:absolute;top:37%;left:5px;transform:translateY(-50%);font-size:15pt;color:#162938;font-weight:500;pointer-events:none;">Tài Khoản</div>
+    <div class="form-group">
+
+
+        <div class="col-md-10" style="position:relative;width:100%;height:20px;border-bottom:2px solid #162938;margin-top:25px;margin-left:15px;">
+            @Html.EditorFor(model => model.TaiKhoan, new { htmlAttributes = new { @class = "form-control custom-input" } })
+            @Html.ValidationMessageFor(model => model.TaiKhoan, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="MatKhau"style="position: absolute; top: 52%; left: 5px; transform: translateY(-50%); font-size: 15pt; color: #162938; font-weight: 500; pointer-events: none;">Mật Khẩu</div>
+    <div class="form-group">
+
+
+        <div class="col-md-10"style="position: relative; width: 100%; height: 20px; border-bottom: 2px solid #162938; margin-top: 45px; margin-left: 15px;">
+            @Html.EditorFor(model => model.MatKhau, new { htmlAttributes = new { @class = "form-control custom-input",type ="password" } })
+            @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" id="DangNhapButton" style="width:100%;height:45px;background:#162938;border:none;outline:none;border-radius:6px;font-size:16pt;color:#fff;font-weight:500;cursor: pointer;" value="Đăng nhập" class="btn btn-primary custom-button" />
+        </div>
+
+    </div>
+    <div style="padding-right:1rem;">
+        <p style="color:white;">Bạn chưa có tài khoản?<a id="DangKyButton" href="/Home/DangKy" style="text-decoration:none;color:red;"> Đăng ký</a></p>
+    </div>
+    <p><a id="" style="text-decoration:none; color:red;" href="/Home/Index">Trang chủ</a></p>
+</div>
+        
+        }
+
+<h3 class="login-fail-message">@ViewBag.LoginFail</h3>
+    </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<BanSach.Models.Voucher>
+
+@{
+    ViewBag.Title = "Danh sách voucher";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+<h2>Danh sách Voucher</h2>
+<p>
+    @Html.ActionLink("Thêm mới Voucher", "Create")
+</p>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Mã</th>
+        <th>Giảm</th>
+        <th>Bắt đầu</th>
+        <th>Kết thúc</th>
+        <th>Số lượng</th>
+        <th>Thao tác</th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>@item.MaVoucher</td>
+        <td>@(item.GiaTriGiam.HasValue ? item.GiaTriGiam.Value.ToString("N0") : "")</td>
+
+        <td>@(item.NgayBatDau.HasValue ? item.NgayBatDau.Value.ToShortDateString() : "")</td>
+
+        <td>@(item.NgayKetThuc.HasValue ? item.NgayKetThuc.Value.ToShortDateString() : "")</td>
+
+        <td>@item.SoLuong</td>
+        <td>
+            @Html.ActionLink("Sửa", "Edit", new { id = item.MaVoucher }) |
+            @Html.ActionLink("Xoá", "Delete", new { id = item.MaVoucher })
+        </td>
+    </tr>
+}
+</table>

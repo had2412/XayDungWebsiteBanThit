@@ -1,0 +1,58 @@
+﻿@model IEnumerable<BanSach.Models.ChiTietDonHang>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+<h2>CHI TIẾT ĐƠN HÀNG</h2>
+
+<p>
+    @Html.ActionLink("Thêm", "ThemMoi")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MaDonHang)
+        </th>
+        <th>
+            Ma SP
+        </th>
+        <th>
+            So Luong
+        </th>
+        <th>
+            Don Gia
+        </th>
+        <th>
+            Đơn giá sau giảm
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaDonHang)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaThit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoLuong)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DonGia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DonGiaSauGiam)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { @MaDonHang = item.MaDonHang }) |
+            @Html.ActionLink("Details", "Details", new { id = item.MaDonHang }) |
+            @Html.ActionLink("Delete", "Delete", new { @MaDonHang = item.MaDonHang })
+        </td>
+    </tr>
+}
+
+</table>

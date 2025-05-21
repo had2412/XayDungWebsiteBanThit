@@ -1,0 +1,170 @@
+﻿@model BanSach.Models.OrderViewModel
+
+@{
+    ViewBag.Title = "ThanhToan";
+    Layout = "~/Views/Layout/IndexLayout.cshtml";
+}
+<style>
+    /* Tạo kiểu cho toàn bộ form */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Định dạng các trường nhập liệu */
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    /* Định dạng cho các nhãn của trường */
+    label {
+        font-weight: bold;
+        font-size: 14px;
+        color: #333;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    /* Cải thiện khoảng cách giữa các phần tử trong form */
+    div {
+        margin-bottom: 15px;
+    }
+
+    /* Tạo kiểu cho bảng giỏ hàng */
+    table.table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: #fff;
+    }
+
+        table.table th, table.table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        table.table th {
+            background-color: #f8f8f8;
+            font-weight: bold;
+        }
+
+        table.table td {
+            background-color: #fff;
+        }
+
+    /* Tạo kiểu cho nút submit */
+    /* Tạo kiểu cho nút submit */
+    button[type="submit"] {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 15px 30px; /* Tăng padding để nút lớn hơn */
+        font-size: 18px; /* Tăng kích thước font */
+        cursor: pointer;
+        border-radius: 5px;
+        margin-top: 20px;
+        min-width: 250px; /* Đảm bảo nút có chiều rộng tối thiểu */
+        text-align: center;
+        display: inline-block;
+        white-space: nowrap; /* Đảm bảo chữ không bị cắt */
+    }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+
+
+    /* Thêm một chút không gian cho header */
+    h2 {
+        font-size: 24px;
+        color: #333;
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    /* Tạo style cho các trường hợp giỏ hàng nếu cần thiết */
+    table.table td {
+        text-align: center;
+    }
+
+    /* Định dạng layout tổng thể */
+    .container {
+        width: 80%;
+        max-width: 1200px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 50px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        
+    }
+
+    h3 {
+        font-size: 20px;
+        color: #333;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+</style>
+<div class="container">
+    <h2>Thông tin đặt hàng</h2>
+
+    @using (Html.BeginForm("ThanhToan", "GioHang", FormMethod.Post))
+    {
+        <div>
+            <label>Họ tên:</label>
+            @Html.TextBoxFor(m => m.HoTen, new { @class = "form-control", required = "required" })
+        </div>
+        <div>
+            <label>Địa chỉ:</label>
+            @Html.TextBoxFor(m => m.DiaChi, new { @class = "form-control", required = "required" })
+        </div>
+        <div>
+            <label>Điện thoại:</label>
+            @Html.TextBoxFor(m => m.DienThoai, new { @class = "form-control", required = "required" })
+        </div>
+        <div>
+            <label>Ghi chú:</label>
+            @Html.TextAreaFor(m => m.GhiChu, new { @class = "form-control" })
+        </div>
+        <div>
+            <label>Mã giảm giá:</label>
+            @Html.TextBoxFor(m => m.MaVoucher, new { @class = "form-control" })
+        </div>
+
+        <h3>Giỏ hàng</h3>
+        <table class="table">
+            <tr>
+                <th>Tên thịt</th>
+                <th>Đơn giá</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+            </tr>
+            @foreach (var item in Model.GioHangItems)
+            {
+                <tr>
+                    <td>@item.sTenThit</td>
+                    <td>@String.Format("{0:N0} VNĐ", item.dDonGia)</td>
+                    <td>@item.iSoLuong</td>
+                    <td>@String.Format("{0:N0} VNĐ", item.ThanhTien)</td>
+                </tr>
+            }
+        </table>
+
+        <button type="submit" class="btn btn-primary">
+            Xác nhận đơn hàng
+        </button>
+
+    }
+</div>
+}
+

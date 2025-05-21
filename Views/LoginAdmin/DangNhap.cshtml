@@ -1,0 +1,47 @@
+﻿@model BanSach.Models.KhachHang
+<link href="~/Content/DangNhapCss.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "DangNhap";
+    Layout = null;
+}
+<div class="container-fluid d-flex justify-content-center align-items-center min-vh-100">
+    <div class="row w-100 justify-content-center">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+            <div class="ToanTrang p-4">
+                <h2 class="page-title text-center" style="color:#162938;">Đăng Nhập</h2>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal custom-form">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <label for="TaiKhoan" class="control-label">Tài Khoản</label>
+                            @Html.EditorFor(model => model.TaiKhoan, new { htmlAttributes = new { @class = "form-control custom-input" } })
+                            @Html.ValidationMessageFor(model => model.TaiKhoan, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label for="MatKhau" class="control-label">Mật Khẩu</label>
+                            @Html.EditorFor(model => model.MatKhau, new { htmlAttributes = new { @class = "form-control custom-input", type = "password" } })
+                            @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" id="DangNhapButton" value="Đăng nhập" class="btn btn-primary custom-button w-100" />
+                        </div>
+                        <div class="form-group text-center">
+                            <p style="color:#162938;">Bạn chưa có tài khoản?<a id="DangKyButton" href="/Home/DangKy" style="text-decoration:none;color:red;"> Đăng ký</a></p>
+                            <p><a id="" style="text-decoration:none; color:red;" href="/Home/Index">Trang chủ</a></p>
+                        </div>
+                    </div>
+                }
+
+                <h3 class="login-fail-message">@ViewBag.LoginFail</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

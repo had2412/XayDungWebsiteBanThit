@@ -1,0 +1,93 @@
+﻿@model BanSach.Models.Thit
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Ma SP:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaThit)
+        </dd>
+
+        <dt>
+            Ten SP:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenThit)
+        </dd>
+
+        <dt>
+            Gia Ban:
+        </dt>
+
+        <dd>
+            @String.Format("{0:0;0}", Model.GiaBan) VNĐ
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MoTa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MoTa)
+        </dd>
+
+        <dt>
+            Anh Bia:
+        </dt>
+
+        <dd>
+            <img src="@Url.Content("~/HinhAnhSp/"+ Model.AnhBia)" width="100px"/>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayCapNhat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayCapNhat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuongTon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuongTon)
+        </dd>
+
+        
+
+        <dt>
+            LoaiSP
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaChuDe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Moi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Moi)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,83 @@
+﻿@using BanSach.Models;
+@model List<GioHang>
+@{
+    ViewBag.Title = "SuaGioHang";
+    Layout = "~/Views/Layout/IndexLayout.cshtml";
+}
+<div id="GioHang">
+    <h2>Giỏ hàng của tôi</h2>
+    <div id="ThongTinGioHang">
+        <table border="1">
+            <tr>
+                <td>Mã Sản Phẩm</td>
+                <td>Tên SP</td>
+                <td>Ảnh bìa</td>
+                <td>Đơn giá</td>
+                <td>Số lượng</td>
+                <td>Thành tiền</td>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.iMaThit</td>
+                    <td>@item.sTenThit</td>
+                    <td><img src="@Url.Content("~/HinhAnhSP/"+item.sAnhBia)" width="50" height="50" /></td>
+                    <td>@string.Format("{0:0,0}", item.dDonGia) VNĐ</td>
+                    @using (Html.BeginForm("CapNhatGioHang", "GioHang", new { @iMaSP = item.iMaThit }))
+                    {
+                        <td>@Html.TextBox("txtSoLuong", item.iSoLuong)</td>
+
+                        <td>@string.Format("{0:0,0}", item.ThanhTien) VNĐ</td>
+                        <td>
+                            <input type="submit" id="SuaGioHangButton" class="submit-button" style="font-size: 13pt; border-radius: 0.5rem; cursor: pointer; " onmouseover="this.style.cursor='pointer';" value="Cập nhật" />
+                            <br />
+                             @Html.ActionLink("Xóa", "XoaGioHang", new { @iMaSP = item.iMaThit })
+                        </td>
+                    }
+
+                    <td>
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
+<style>
+    #divGioHang {
+        border: 1px solid #EEEEEE;
+        margin-left: 10%;
+    }
+
+    #ThongTinGioHang {
+        display: flex;
+        justify-content: space-between;
+        background-color: #f0f0f0; /* Màu nền của hàng */
+        font-weight: bold; /* In đậm nội dung */
+        padding: 10px; /* Khoảng cách giữa các cột */
+        padding-top: 12rem;
+        font-size: 13pt;
+    }
+
+        #ThongTinGioHang td {
+            flex: 1;
+            text-align: center;
+            padding:10px;
+        }
+
+    #SuaGioHangButton:hover {
+        background-color: #bac34e;
+    }
+    a:hover {
+        background-color: #bac34e;
+    }
+</style>
+<script>
+    document.querySelector("#SuaGioHangButton").addEventListener("mouseover", function () {
+        this.style.cursor = "pointer";
+    });
+</script>
+
